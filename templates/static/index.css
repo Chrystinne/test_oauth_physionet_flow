@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --background-color: #FFFFFF;
+    --text-color: #000000;
+    --font-family: "Prompt", sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 100vh;
+    gap: 1rem;
+    overflow: hidden;
+    margin: 0;
+}
+
+main {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    margin-top: 0.45rem;
+    height: 45rem;
+    width: 40.03rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-align: center;
+}
+
+p {
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 2rem;
+    color: var(--text-color);
+    margin-bottom: 0.625rem;
+}
