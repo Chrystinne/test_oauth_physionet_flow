@@ -7,6 +7,7 @@ import base64
 import hashlib
 from urllib.parse import urlencode
 import time
+from tech.utils import get_valid_token
 
 def index(request):
     return render(request, 'index.html')
@@ -81,6 +82,7 @@ def physionet_callback(request):
 
 def physionet_dataset_check(request):
     """Chama o endpoint dataset-access do PhysioNet com o token."""
+    token = get_valid_token(request)
     token = request.session.get('physionet_access_token')
     if not token:
         return redirect('/physionet/login/')
