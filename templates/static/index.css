@@ -34,6 +34,12 @@ main {
     width: 40.03rem;
 }
 
+.login-logo {
+    margin-top: 0.45rem;
+    height: 12rem;
+    width: 10.03rem;
+}
+
 h1 {
     font-size: 2rem;
     font-weight: 600;
