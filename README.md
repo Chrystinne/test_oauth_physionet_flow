@@ -23,6 +23,6 @@
    }
 ```
 6. To check access for a different project, navigate to:
-```
-   http://localhost:8001/physionet/dataset/?slug=demoselfmanaged&version=1.0.0
-```
+`http://localhost:8001/physionet/dataset/?slug=SLUG&version=VERSION`
+
+   For example: `http://localhost:8001/physionet/dataset/?slug=demoselfmanaged&version=1.0.0`
