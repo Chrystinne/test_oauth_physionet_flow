@@ -97,11 +97,11 @@ def physionet_dataset_check(request):
     # slug    = request.GET.get('slug', 'mimic-iv')
     # version = request.GET.get('version', '3.1')
 
-    # slug    = request.GET.get('slug', 'demoeicu')
-    # version = request.GET.get('version', '2.0.0')
+    slug    = request.GET.get('slug', 'demoeicu')
+    version = request.GET.get('version', '2.0.0')
 
-    slug    = request.GET.get('slug', 'demoselfmanaged')
-    version = request.GET.get('version', '1.0.0')
+    # slug    = request.GET.get('slug', 'demoselfmanaged')
+    # version = request.GET.get('version', '1.0.0')
 
     response = requests.get(
         f"{settings.PHYSIONET_BASE_URL}/oauth/dataset-access/",
