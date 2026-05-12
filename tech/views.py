@@ -14,7 +14,7 @@ def index(request):
 
 # PhysioNet OAuth2 flow
 def physionet_login(request):
-    """Redireciona para o PhysioNet para autorizar o app."""
+    """Redirects to PhysioNet to authorize the app."""
     state = secrets.token_urlsafe(16)
     code_verifier, code_challenge = generate_pkce_pair()
 
@@ -36,6 +36,9 @@ def physionet_login(request):
 
 
 def physionet_callback(request):
+    """Receives the authorization code, exchanges it for a token, and saves it to the session."""
+
+    # First handle errors returned by the OAuth server
     if request.GET.get("error"):
         return JsonResponse(
             {"error": request.GET.get("error"), "description": request.GET.get("error_description")},
@@ -81,7 +84,7 @@ def physionet_callback(request):
 
 
 def physionet_dataset_check(request):
-    """Chama o endpoint dataset-access do PhysioNet com o token."""
+    """Calls the PhysioNet dataset-access endpoint with the access token."""
     token = get_valid_token(request)
     token = request.session.get('physionet_access_token')
     if not token:
