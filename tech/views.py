@@ -6,6 +6,7 @@ from django.http import JsonResponse
 import base64
 import hashlib
 from urllib.parse import urlencode
+import time
 
 def index(request):
     return render(request, 'index.html')
@@ -34,22 +35,14 @@ def physionet_login(request):
 
 
 def physionet_callback(request):
-    """Recebe o code, troca por token, salva na sessão."""
-
-    # First handle errors returned by the OAuth server
     if request.GET.get("error"):
         return JsonResponse(
-            {
-                "error": request.GET.get("error"),
-                "description": request.GET.get("error_description"),
-            },
+            {"error": request.GET.get("error"), "description": request.GET.get("error_description")},
             status=400,
         )
 
-    # Validate state to prevent CSRF attacks
     returned_state = request.GET.get("state", "")
     saved_state = request.session.pop("physionet_oauth_state", "")
-
     if returned_state != saved_state:
         return JsonResponse({"error": "Invalid state"}, status=400)
 
@@ -74,16 +67,14 @@ def physionet_callback(request):
     )
 
     if token_response.status_code != 200:
-        return JsonResponse(
-            {
-                "error": "Token exchange failed",
-                "detail": token_response.text,
-            },
-            status=400,
-        )
+        return JsonResponse({"error": "Token exchange failed", "detail": token_response.text}, status=400)
 
     token_data = token_response.json()
+
+    # Save access_token, refresh_token, and access token expiration time
     request.session["physionet_access_token"] = token_data["access_token"]
+    request.session["physionet_refresh_token"] = token_data["refresh_token"]
+    request.session["physionet_token_expires_at"] = time.time() + token_data["expires_in"]
 
     return redirect("/physionet/dataset/")
 
