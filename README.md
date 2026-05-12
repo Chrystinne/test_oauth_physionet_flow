@@ -1,5 +1,15 @@
 # Test_oauth_physionet_flow
 
+## Setup
+
+Before testing, you need to register the client application on the PhysioNet OAuth server to obtain credentials. Please request a `Client ID` and `Client Secret` from the PhysioNet team.
+
+Once you have the credentials, add them to `setup/settings.py` (or use an .env file):
+```python
+PHYSIONET_CLIENT_ID = "your-client-id"
+PHYSIONET_CLIENT_SECRET = "your-client-secret"
+```
+
 ## Testing the OAuth client application
 1. In the terminal, run the PhysioNet server on localhost (e.g., port 8000):
 ```bash
